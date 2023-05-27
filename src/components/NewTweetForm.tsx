@@ -12,14 +12,6 @@ function updateTextAreaSize(textArea?: HTMLTextAreaElement){
 
 export default function NewTweetForm() {
     const session = useSession();
-    if(session.status !== "authenticated") return
-
-     return <Form/>
- 
-}
-
-function Form(){
-    const session = useSession();
     const [inputValue, setInputValue] = useState("");
     const textAreaRef = useRef<HTMLTextAreaElement>()
 
@@ -32,7 +24,7 @@ function Form(){
 
     } , [inputValue])
 
-    if(session.status !== "authenticated") return null
+    if(session.status !== "authenticated") return  null
 
   return (
     <form action="" className="flex flex-col gap-2 border-b px-4 py-2">
@@ -50,7 +42,7 @@ function Form(){
     </form>
   
   )
-
 }
+
 
 

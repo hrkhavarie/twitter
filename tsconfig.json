@@ -28,6 +28,6 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs"
-  ],
+, "src/components/NewTweetForm.jsx"  ],
   "exclude": ["node_modules"]
 }
