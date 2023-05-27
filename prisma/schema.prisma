@@ -4,7 +4,6 @@
 generator client {
   provider = "prisma-client-js"
 }
-
 datasource db {
   provider = "mysql"
   url = env("DATABASE_URL")
@@ -18,7 +17,8 @@ model Tweet {
     content String
     createdAt DateTime @default(now())
     
-    user User @relation(fields: [userId] , reference: [id] , onDelete: Cascade)
+   user User @relation(fields: [userId] , references: [id] , onDelete: Cascade)
+   likes Like[]
     @@index([userId])
 
 }
@@ -26,13 +26,12 @@ model Tweet {
 model Like {
     userId String
     tweetId String
-    user User @relation(fields:[userId] , reference:[id] , onDelete: Cascade)
-    user Tweet @relation(fields:[tweetId] , reference:[id] , onDelete: Cascade)
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    Tweet   Tweet      @relation(fields:[tweetId] , references:[id] , onDelete: Cascade)
 
     @@id([userId , tweetId])
-
-    @index([userId])
-    @index([tweetId])
+    @@index([userId])
+    @@index([tweetId])
 
 }
 
@@ -77,10 +76,10 @@ model User {
     sessions      Session[]
 
     // non next-Auth
-    tweets        Tweet[]
+    tweets           Tweet[]
     likes               Like[]
-    followers User[] @relation(name: "followers")
-    follows User[] @relation(name: "followers")
+    followers       User[]  @relation(name: "Followers")
+    follows          User[]  @relation(name: "Followers")
 }
 
 model VerificationToken {
